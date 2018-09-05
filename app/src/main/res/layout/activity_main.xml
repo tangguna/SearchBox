@@ -9,10 +9,9 @@
 <com.tangguna.searchbox.library.widget.SearchLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/msearchlayout"
+    android:id="@+id/searchlayout"
     app:search_hint="输入搜索内容"
     app:search_baground="@drawable/search_baground_shap">
-
 </com.tangguna.searchbox.library.widget.SearchLayout>
 
 </LinearLayout>

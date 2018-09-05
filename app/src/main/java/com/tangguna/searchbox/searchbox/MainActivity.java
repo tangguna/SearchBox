@@ -16,24 +16,22 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SearchLayout msearchLy;
+    private SearchLayout searchLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        msearchLy = (SearchLayout)findViewById(R.id.msearchlayout);
+        searchLayout = (SearchLayout)findViewById(R.id.searchlayout);
         initData();
     }
 
     private void initData() {
 
         List<String> skills = HistoryCache.toArray(getApplicationContext());
-
         String shareHotData ="C++,C,PHP,React";
         List<String> skillHots = Arrays.asList(shareHotData.split(","));
-
-        msearchLy.initData(skills, skillHots, new onSearchCallBackListener() {
+        searchLayout.initData(skills, skillHots, new onSearchCallBackListener() {
             @Override
             public void Search(String str) {
                 //进行或联网搜索

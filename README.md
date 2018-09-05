@@ -5,6 +5,7 @@ android 自定义选择框
     1.包含历史搜索，热门搜索；
     2.可以从服务器或者本地加载数据；
     3.历史记录缓存，动态添加记录
+    4 listView，gridView两种显示方式
 ### 配置
 #### 在根build.gradle中添加
      	allprojects {
@@ -24,7 +25,7 @@ android 自定义选择框
      public abstract void Back()：返回
      public abstract void ClearOldData()：清空历史记录
      public abstract void SaveOldData(ArrayList<String> AlloldDataList)：保存搜索记录
-#### 调用
+#### 调用 GridView
      在XML中添加布局
      <com.tangguna.searchbox.library.widget.SearchLayout
         android:layout_width="match_parent"

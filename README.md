@@ -1,5 +1,6 @@
 # SearchBox
 android 自定义选择框
+![图片加载失败](https://github.com/tangguna/SearchBox/blob/master/img/Screenshot_1536113915.png)
 ### 功能
     1.包含历史搜索，热门搜索；
     2.可以从服务器或者本地加载数据；

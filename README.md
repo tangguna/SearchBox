@@ -76,3 +76,8 @@ android 自定义选择框
     
 #### HistoryCache
      HistoryCache为历史记录缓存类，包含方法如下：
+     public static void clear(Context context)：清除所有数据
+     public static void saveHistory(Context context, String result)：保存记录
+     public static String getHistory(Context context)：获取保存记录
+     public static List<String> toArray(Context context):把json数据转换成list
+     public static String toJsonArray(List<String> historyList):ArrayList 转换成JsonArray

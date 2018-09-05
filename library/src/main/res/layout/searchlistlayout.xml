@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            layout="@layout/msearch_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000000"
+            android:text="@string/search_all" />
+        <View
+            android:background="#eeeeee"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <com.tangguna.searchbox.library.widget.FlowLayout
+            android:padding="10dp"
+            android:id="@+id/id_flowlayouthot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.tangguna.searchbox.library.widget.FlowLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#000000"
+                android:text="@string/search_lately"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/heise"
+                android:id="@+id/tvclearolddata"
+                android:text="@string/search_clear"
+                android:background="@drawable/sousuo_clearolddata_shap"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp" />
+        </RelativeLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:background="#eeeeee"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+            <com.tangguna.searchbox.library.widget.SelfSearchListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/gridviewolddata"
+                android:scrollbars="none"
+                android:gravity="center">
+            </com.tangguna.searchbox.library.widget.SelfSearchListView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:background="@drawable/ll_clear_bg"
+            android:id="@+id/ll_clear"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp">
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/icon_clear_data"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+            <TextView
+                android:textSize="12sp"
+                android:text="清空历史搜索"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

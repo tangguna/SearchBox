@@ -8,13 +8,11 @@ public interface onSearchCallBackListener {
     /**
      * @param str  搜索关键字
      */
-    public void Search(String str);
-
+    public abstract void Search(String str);
     /**
      * 后退
      */
     public abstract void Back();
-
     /**
      * 清除历史搜索记录
      */

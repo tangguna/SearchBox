@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +21,8 @@ import android.widget.TextView;
 
 import com.tangguna.searchbox.library.R;
 import com.tangguna.searchbox.library.adapter.HistoryDataAdapter;
+import com.tangguna.searchbox.library.adapter.HistoryDataListViewAdapter;
+import com.tangguna.searchbox.library.cache.HistoryCache;
 import com.tangguna.searchbox.library.callback.onSearchCallBackListener;
 
 import java.util.ArrayList;
@@ -29,36 +30,36 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * 搜索框 GridView
+ * 搜索框ListView
  */
-public class SearchLayout extends LinearLayout {
-
+public class SearchListLayout extends LinearLayout {
     private String msearch_hint;
     private int msearch_baground;
     private Context context;
     private ImageView ib_searchtext_delete;
     private EditText et_searchtext_search;
     private LinearLayout searchview;
+    private LinearLayout ll_clear;
     private Button bt_text_search_back;
     private TextView tvclearolddata;
     //历史搜索
-    private SelfSearchGridView gridViewData;
-    private HistoryDataAdapter historyDataAdapter;
+    private SelfSearchListView gridViewData;
+    private HistoryDataListViewAdapter historyDataAdapter;
     private ArrayList<String> historyList = new ArrayList<>();
     //热门搜索
     FlowLayout hotflowLayout;
 
     private String backtitle="取消",searchtitle="搜索";
-    private OnClickListener TextViewItemListener;
+    private View.OnClickListener TextViewItemListener;
     private int countOldDataSize=15;//默认搜索记录的条数， 正确的是传入进来的条数
 
-    public SearchLayout(Context context) {
+    public SearchListLayout(Context context) {
         super(context);
         this.context = context;
         initView();
     }
 
-    public SearchLayout(Context context, @Nullable AttributeSet attrs) {
+    public SearchListLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
 
@@ -69,17 +70,16 @@ public class SearchLayout extends LinearLayout {
         initView();
     }
 
-    public SearchLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public SearchListLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
         initView();
     }
 
     private void initView() {
-
         backtitle=getResources().getString(R.string.search_cancel);
         searchtitle=getResources().getString(R.string.search_verify);
-        searchview =(LinearLayout) LayoutInflater.from(context).inflate(R.layout.msearchlayout, null);
+        searchview =(LinearLayout) LayoutInflater.from(context).inflate(R.layout.searchlistlayout, null);
         //把获得的view加载到这个控件中
         addView(searchview);
         //把两个按钮从布局文件中找到
@@ -91,8 +91,9 @@ public class SearchLayout extends LinearLayout {
         bt_text_search_back = (Button) searchview.findViewById(R.id.buttonback);
         //清除历史记录
         tvclearolddata = (TextView) searchview.findViewById(R.id.tvclearolddata);
-
-        gridViewData=  (SelfSearchGridView)searchview.findViewById(R.id.gridviewolddata);
+        //清空搜索记录
+        ll_clear = (LinearLayout) findViewById(R.id.ll_clear);
+        gridViewData=  (SelfSearchListView) searchview.findViewById(R.id.gridviewolddata);
         gridViewData.setSelector(new ColorDrawable(Color.TRANSPARENT));//去除背景点击效果
 
         hotflowLayout =  (FlowLayout)searchview.findViewById(R.id.id_flowlayouthot);
@@ -128,8 +129,22 @@ public class SearchLayout extends LinearLayout {
     }
 
     private void setLinstener() {
+        /**
+         * 清空历史记录
+         */
+        ll_clear.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(sCBlistener!=null) {
+                    historyList.clear();
+                    historyDataAdapter.notifyDataSetChanged();
+                    sCBlistener.ClearOldData();
+                }
+                ll_clear.setVisibility(GONE);
+            }
+        });
         //给删除按钮添加点击事件
-        ib_searchtext_delete.setOnClickListener(new OnClickListener() {
+        ib_searchtext_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
@@ -155,7 +170,7 @@ public class SearchLayout extends LinearLayout {
 
 
 
-        bt_text_search_back.setOnClickListener(new OnClickListener() {
+        bt_text_search_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String searchtext = et_searchtext_search.getText().toString().trim();
@@ -172,7 +187,7 @@ public class SearchLayout extends LinearLayout {
 
 
 
-        tvclearolddata.setOnClickListener(new OnClickListener() {
+        tvclearolddata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(sCBlistener!=null) {
@@ -184,7 +199,7 @@ public class SearchLayout extends LinearLayout {
         });
 
 
-        TextViewItemListener = new OnClickListener(){
+        TextViewItemListener = new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 String string = ((TextView)v).getText().toString();
@@ -219,13 +234,14 @@ public class SearchLayout extends LinearLayout {
      * @param sCb  事件处理监听
      * @param styleId 热门搜索样式(值在1到5之间) 可以在drawable下修改、添加 sousuo_bg_gray_X等样式背景
      */
-    public void initData(@Nullable List<String> olddatalist,@Nullable List<String> hotdata, onSearchCallBackListener sCb,int styleId){
+    public void initData(@Nullable List<String> olddatalist, @Nullable List<String> hotdata, onSearchCallBackListener sCb, int styleId){
         SetCallBackListener(sCb);
         hotflowLayout.removeAllViews();
         historyList.clear();
         if(olddatalist!=null)
             historyList.addAll(olddatalist);
-        historyDataAdapter = new HistoryDataAdapter(context,historyList);
+        ll_clear.setVisibility(VISIBLE);
+        historyDataAdapter = new HistoryDataListViewAdapter(context,historyList);
         gridViewData.setAdapter(historyDataAdapter);
 
 
@@ -249,6 +265,7 @@ public class SearchLayout extends LinearLayout {
     private void executeSearch_and_NotifyDataSetChanged(String str){
         if(sCBlistener!=null&&(!str.equals(""))){
             if (historyList.size() > 0 && historyList.get(0).equals(str)) {
+                ll_clear.setVisibility(VISIBLE);
             }
             else
             {
@@ -267,6 +284,7 @@ public class SearchLayout extends LinearLayout {
                     sCBlistener.SaveOldData(historyList);
                 }
             }
+            ll_clear.setVisibility(VISIBLE);
             et_searchtext_search.setText(str);
             sCBlistener.Search(str);
             et_searchtext_search.setCursorVisible(false);

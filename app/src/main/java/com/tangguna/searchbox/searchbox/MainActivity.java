@@ -3,12 +3,12 @@ package com.tangguna.searchbox.searchbox;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.tangguna.searchbox.library.cache.HistoryCache;
 import com.tangguna.searchbox.library.callback.onSearchCallBackListener;
-import com.tangguna.searchbox.library.widget.SearchLayout;
+import com.tangguna.searchbox.library.widget.SearchListLayout;
+import com.tangguna.searchbox.library.widget.SelfSearchListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,18 +16,17 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SearchLayout searchLayout;
+    private SearchListLayout searchLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        searchLayout = (SearchLayout)findViewById(R.id.searchlayout);
+        searchLayout = (SearchListLayout)findViewById(R.id.searchlayout);
         initData();
     }
 
     private void initData() {
-
         List<String> skills = HistoryCache.toArray(getApplicationContext());
         String shareHotData ="C++,C,PHP,React";
         List<String> skillHots = Arrays.asList(shareHotData.split(","));
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 HistoryCache.saveHistory(getApplicationContext(),HistoryCache.toJsonArray(AlloldDataList));
                 Log.e("点击","保存数据");
             }
-        },5);
+        },1);
     }
 
 

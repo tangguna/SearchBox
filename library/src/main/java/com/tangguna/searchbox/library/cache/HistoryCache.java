@@ -13,7 +13,7 @@ import java.util.List;
 public class HistoryCache {
 
     /**
-     * 清除所以数据
+     * 清除所有数据
      * @param context
      */
     public static void clear(Context context) {

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"
+    >
+    <corners android:radius="20dp"/>
+    <padding android:left="13dp" android:right="13dp" android:top="7dp" android:bottom="7dp"/>
+    <solid android:color="@color/bg_huise_ff"/>
+
+
+</shape>
+
+
+<!--<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"
+        >
+    <corners android:radius="10dp"/>
+    <solid android:color="@color/baise"/>
+    <stroke android:width="0.5dp"
+        android:color="@color/huise" />
+    <padding android:left="13dp" android:right="13dp" android:top="3dp" android:bottom="3dp"/>
+
+</shape>-->

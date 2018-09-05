@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+<com.tangguna.searchbox.library.widget.SearchLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/msearchlayout"
+    app:search_hint="输入搜索内容"
+    app:search_baground="@drawable/search_baground_shap">
+
+</com.tangguna.searchbox.library.widget.SearchLayout>
+
+</LinearLayout>
